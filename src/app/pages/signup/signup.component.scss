@@ -1,0 +1,79 @@
+.form-card {
+    display: flex;
+    align-items: center;
+    width: 40vw;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: rgb(179, 175, 255);
+    box-shadow: 0 4px 20px;
+    max-width: 100%;
+}
+
+.signup-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    max-width: 100%;
+}
+
+.signup-text {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    align-items: center;
+    max-width: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.name-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+    max-width: 100%;
+}
+
+.signup-btn {
+    width: 140px;
+    font-size: 20px;
+    max-width: 100%;
+}
+
+.login-href {
+    margin-top: 0;
+    max-width: 100%;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
+}
+
+mat-hint {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    .form-card {
+        width: 85vw;
+    }
+
+    .signup-card {
+        max-width: 100%;
+    }
+}

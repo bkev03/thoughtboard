@@ -3,7 +3,6 @@ import { RouterLink } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -12,7 +11,6 @@ import { MatButtonModule } from '@angular/material/button';
     RouterLink,
     MatCardModule,
     MatIconModule,
-    MatSelectModule,
     MatButtonModule
   ],
   templateUrl: './home.component.html',
