@@ -1,41 +1,40 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { TopicsComponent } from './pages/topics/topics.component';
-import { PollsComponent } from './pages/polls/polls.component';
-import { SearchComponent } from './pages/search/search.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
-import { SignupComponent } from './pages/signup/signup.component';
-import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
     {
-        path: 'home',
-        component: HomeComponent
+        path: 'home', 
+        title: 'ThoughtBoard - Home',
+        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
     },
     {
         path: 'topics',
-        component: TopicsComponent
+        title: 'ThoughtBoard - Topics',
+        loadComponent: () => import('./pages/topics/topics.component').then(m => m.TopicsComponent)
     },
     {
         path: 'polls',
-        component: PollsComponent
+        title: 'ThoughtBoard - Polls',
+        loadComponent: () => import('./pages/polls/polls.component').then(m => m.PollsComponent)
     },
     {
         path: 'search',
-        component: SearchComponent
+        title: 'ThoughtBoard - Search Topics',
+        loadComponent: () => import('./pages/search/search.component').then(m => m.SearchComponent)
     },
     {
         path: 'my-profile',
-        component: ProfileComponent
+        title: 'ThoughtBoard - My Profile',
+        loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent)
     },
     {
         path: 'signup',
-        component: SignupComponent
+        title: 'ThoughtBoard - Signup',
+        loadComponent: () => import('./pages/signup/signup.component').then(m => m.SignupComponent)
     },
     {
         path: 'login',
-        component: LoginComponent
+        title: 'ThoughtBoard - Login',
+        loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent)
     },
     {
         path: '',
@@ -44,6 +43,7 @@ export const routes: Routes = [
     },
     {
         path: '**',
-        component: PageNotFoundComponent
+        title: 'ThoughtBoard - 404',
+        loadComponent: () => import('./shared/page-not-found/page-not-found.component').then(m => m.PageNotFoundComponent)
     }
 ];
