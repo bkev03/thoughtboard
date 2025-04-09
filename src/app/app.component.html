@@ -1,4 +1,26 @@
-<h1 class="title">Welcome to ThoughtBoard!</h1>
-<h2 class="text">Here you can discuss various topics, drop your thoughts, and talk about your interests.</h2>
-
-<router-outlet />
+<mat-sidenav-container>
+    <mat-sidenav #sidenav>
+      <app-menu [sidenav]="sidenav"></app-menu>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar>
+            <button 
+            mat-button 
+            (click)="onToggleSidenav(sidenav)"
+            class="menu-toggle-button">
+            <mat-icon class="menubar">menu</mat-icon>
+            </button>
+            <div class="name">ThoughtBoard</div>
+            <nav>
+            <ul>
+                <li><a routerLink="/home">Home</a></li>
+                <li><a routerLink="/topics">Topics</a></li>
+                <li><a routerLink="/polls">Polls</a></li>
+                <li><a routerLink="/search">Search Topics</a></li>
+                <li><a routerLink="/my-profile">My Profile</a></li>
+            </ul>
+            </nav>
+        </mat-toolbar>
+        <router-outlet />
+    </mat-sidenav-content>
+</mat-sidenav-container>
