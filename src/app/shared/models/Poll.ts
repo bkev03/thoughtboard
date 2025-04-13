@@ -8,6 +8,7 @@ export interface Poll {
     open: boolean;
     createdAt: Date
     closeDate: Date;
-    createdBy: User;
+    createdBy: string;
     options: PollOption[];
+    allVotes: number;
 }

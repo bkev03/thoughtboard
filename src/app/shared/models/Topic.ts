@@ -5,7 +5,7 @@ export interface Topic {
     id: number;
     name: string;
     description: string;
-    createdBy: User;
+    createdBy: string;
     createdAt: Date;
     comments: Comment[];
 }

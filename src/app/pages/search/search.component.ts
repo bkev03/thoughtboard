@@ -10,6 +10,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
+import { ReadableDatePipe } from '../../shared/pipes/date.pipe';
+
 @Component({
   selector: 'app-search',
   imports: [
@@ -20,7 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatTableModule,
     MatIcon,
-    MatButtonModule
+    MatButtonModule,
+    ReadableDatePipe
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
