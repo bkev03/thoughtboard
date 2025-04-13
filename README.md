@@ -1,4 +1,4 @@
-# ThoughtBoard - Általános Fórum Alkalmazás
+# ThoughtBoard - Általános fórum alkalmazás
 
 ## Információ a javításhoz
 Az első mérföldkőre elkészült program a main branchen található.  
