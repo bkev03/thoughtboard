@@ -1,0 +1,63 @@
+<main>
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title class="signup-text">Sign up</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="signup-card">
+      <form [formGroup]="signupForm" (ngSubmit)="onSignup()" class="signup-form">
+        <mat-form-field appearance="fill">
+          <mat-label>Nickname</mat-label>
+          <input matInput formControlName="nickname">
+          <mat-icon matSuffix>account_circle</mat-icon>
+          <mat-hint>Your nickname must consist of at least 2 letters.</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email">
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-hint>example&#64;email.com</mat-hint>
+        </mat-form-field>
+
+        <div class="name-row" formGroupName="name">
+          <mat-form-field appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstname">
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastname">
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-icon matSuffix>key</mat-icon>
+          <mat-hint>Your password must be at least 8 letters long.</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput type="password" formControlName="passwordConfirm">
+          <mat-icon matSuffix>key</mat-icon>
+        </mat-form-field>
+
+        @if (signupError) {
+          <div class="signup-errors">
+            @for (error of signupError; track $index) {
+              <p class="signup-error">{{error}}</p>
+            }
+          </div>
+        }
+  
+        <button mat-flat-button color="primary" type="submit" class="signup-btn">Sign up</button>
+        <p class="login-href">Already have an account? <a [routerLink]="['/login']">Log in</a></p>  
+      </form>
+    </mat-card-content>  
+  </mat-card>
+</main>

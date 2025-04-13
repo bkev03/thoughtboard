@@ -1,0 +1,64 @@
+.form-card {
+    display: flex;
+    align-items: center;
+    width: 35vw;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 20px;
+    max-width: 100%;
+}
+
+.login-error {
+    color: red;
+}
+
+.login-card {
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+
+.login-text {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    max-width: 100%;
+}
+
+mat-form-field {
+    max-width: 100%;
+}
+
+.login-btn {
+    max-width: 100%;
+    width: 120px;
+    font-size: 22px;
+}
+
+.signup-href {
+    max-width: 100%;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
+}
+
+@media (max-width: 768px) {
+    .form-card {
+        width: 85vw;
+    }
+
+    .login-text {
+        font-size: 28px;
+    }
+}

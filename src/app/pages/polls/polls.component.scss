@@ -1,0 +1,140 @@
+.title {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 36px;
+}
+
+.results-card {
+    width: 60%;
+    box-shadow: 0 4px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.results-card-header {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.found-polls-number {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.no-topics-found {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.hr {
+    margin-top: 20px;
+    width: 80%;
+}
+
+.poll-card {
+    width: 90%;
+    margin-bottom: 50px;
+}
+
+.poll-name {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.poll-description {
+    margin-top: 14px;
+    margin-bottom: 18px;
+}
+
+.option-card {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+mat-progress-bar {
+    width: 90%;
+    height: 8px;
+    padding: 16px 0;
+    border-radius: 4px;
+}
+
+.poll-data {
+    font-size: 20px;
+    margin: 0;
+}
+
+.poll-data:nth-child(6) {
+    margin-bottom: 28px;
+}
+
+.closed-icon {
+    font-size: 36px;
+    height: 36px;
+    width: 36px;
+    color: red;
+}
+
+.open-icon {
+    font-size: 36px;
+    height: 36px;
+    width: 36px;
+    color: green;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+}
+
+.option-text {
+    padding-left: 30px;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.percentage {
+    padding-right: 30px;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 0;
+    color: blue;
+}
+
+@media (max-width: 1200px) {
+    .results-card {
+        width: 90%;
+    }
+
+    .option-text {
+        padding-left: 10px;
+    }
+    
+    .percentage {
+        padding-right: 10px;
+    }
+}

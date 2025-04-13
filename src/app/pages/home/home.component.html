@@ -1,0 +1,31 @@
+<main class="welcome-container">
+  <mat-card class="welcome-card">
+    <mat-card-header>
+      <mat-card-title class="welcome">Welcome to ThoughtBoard!</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="site-info">
+      It's a place where you can drop your thoughts, 
+      find other people to talk about your interests 
+      or just make polls about topics that keeps you awake at night.
+      <br>
+      Whatever floats your boat, you can find people here who share the same passion as you.
+    </mat-card-content>
+
+    @if (!isLoggedIn) {
+      <mat-card-content>
+        <div class="join-us">
+            Come join us today!
+        </div>
+      </mat-card-content>
+  
+      <mat-card-content>
+        <button class="signup-btn" mat-flat-button color="primary" [routerLink]="['/signup']">Signup</button>
+      </mat-card-content>
+    } @else {
+      <mat-card-content>
+        <button class="search-topics-btn" mat-flat-button color="primary" [routerLink]="['/search']">Search Topics</button>
+      </mat-card-content>
+    }
+  </mat-card>
+</main>

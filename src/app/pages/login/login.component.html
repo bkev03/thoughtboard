@@ -1,0 +1,33 @@
+<main>
+  <mat-card class="form-card">
+      <mat-card-header>
+        <mat-card-title class="login-text">Log in to TB Account</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="login-card">
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+            <mat-icon matSuffix>account_circle</mat-icon>
+          </mat-form-field>
+                
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+            <mat-icon matSuffix>key</mat-icon>
+          </mat-form-field>
+
+          @if (loginError) {
+            <div>
+              <p class="login-error">{{loginError}}</p>
+            </div>
+          }
+          
+          <button mat-flat-button color="primary" type="submit" class="login-btn">Log in</button>
+          <p class="signup-href">Don't have an account? <a [routerLink]="['/signup']">Sign Up</a></p> 
+        </form>
+      </mat-card-content>
+  </mat-card>
+</main>
+
