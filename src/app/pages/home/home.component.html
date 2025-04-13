@@ -12,14 +12,20 @@
       Whatever floats your boat, you can find people here who share the same passion as you.
     </mat-card-content>
 
-    <mat-card-content>
-      <div class="join-us">
-          Come join us today!
-      </div>
-    </mat-card-content>
-
-    <mat-card-content>
-      <button class="signup-btn" mat-flat-button color="primary" [routerLink]="['/signup']">Signup</button>
-    </mat-card-content>
+    @if (!isLoggedIn) {
+      <mat-card-content>
+        <div class="join-us">
+            Come join us today!
+        </div>
+      </mat-card-content>
+  
+      <mat-card-content>
+        <button class="signup-btn" mat-flat-button color="primary" [routerLink]="['/signup']">Signup</button>
+      </mat-card-content>
+    } @else {
+      <mat-card-content>
+        <button class="search-topics-btn" mat-flat-button color="primary" [routerLink]="['/search']">Search Topics</button>
+      </mat-card-content>
+    }
   </mat-card>
 </main>
