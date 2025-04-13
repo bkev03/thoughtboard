@@ -4,7 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-polls',
   imports: [],
   templateUrl: './polls.component.html',
-  styleUrl: './polls.component.scss'
+  styleUrl: './polls.component.scss',
+  standalone: true
 })
 export class PollsComponent {
 

@@ -1,26 +1,31 @@
 <mat-sidenav-container>
-    <mat-sidenav #sidenav>
-      <app-menu [sidenav]="sidenav"></app-menu>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <mat-toolbar>
-            <button 
-            mat-button 
-            (click)="onToggleSidenav(sidenav)"
-            class="menu-toggle-button">
-            <mat-icon class="menubar">menu</mat-icon>
-            </button>
-            <div class="name">ThoughtBoard</div>
-            <nav>
-            <ul>
-                <li><a routerLink="/home">Home</a></li>
-                <li><a routerLink="/topics">Topics</a></li>
-                <li><a routerLink="/polls">Polls</a></li>
-                <li><a routerLink="/search">Search Topics</a></li>
-                <li><a routerLink="/my-profile">My Profile</a></li>
-            </ul>
-            </nav>
-        </mat-toolbar>
-        <router-outlet />
-    </mat-sidenav-content>
+  <mat-sidenav #sidenav>
+    <app-menu [sidenav]="sidenav" [isLoggedIn]="isLoggedIn" [currentUser]="currentUser"></app-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button mat-button (click)="onToggleSidenav(sidenav)" class="menu-toggle-button">
+        <mat-icon class="menubar">menu</mat-icon>
+      </button>
+      <div class="name-div"><a class="name" routerLink="/home">ThoughtBoard</a></div>
+      <nav>
+        <ul class="navbar">
+          <li><a class="navbar-element" routerLink="/home">Home</a></li>
+          <li><a class="navbar-element" routerLink="/topics">Topics</a></li>
+          <li><a class="navbar-element" routerLink="/polls">Polls</a></li>
+          <li><a class="navbar-element" routerLink="/search">Search Topics</a></li>
+          @if (isLoggedIn) {
+            <li><a class="navbar-element" routerLink="/my-profile">My Profile</a></li>
+            <li><a href="#" class="navbar-element" (click)="$event.preventDefault(); logout()">Logout</a></li>
+          }
+          @if (!isLoggedIn) {
+            <li><a class="navbar-element" routerLink="/login">Login</a></li>
+          }
+        </ul>
+      </nav>
+    </mat-toolbar>
+    <div class="router-outlet-container">
+      <router-outlet />
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>

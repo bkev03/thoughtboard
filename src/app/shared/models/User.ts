@@ -1,5 +1,4 @@
 export interface User {
-    id: number;
     nickname: string
     name: {
         firstname: string;
@@ -8,5 +7,5 @@ export interface User {
     signupDate: Date;
     email: string;
     password: string;
-    role: string;
+    role: "ROLE_USER" | "ROLE_ADMIN";
 }

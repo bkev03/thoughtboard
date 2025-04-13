@@ -14,7 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule
   ],
   templateUrl: './page-not-found.component.html',
-  styleUrl: './page-not-found.component.scss'
+  styleUrl: './page-not-found.component.scss',
+  standalone: true
 })
 export class PageNotFoundComponent {
 

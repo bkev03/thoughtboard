@@ -4,7 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-topics',
   imports: [],
   templateUrl: './topics.component.html',
-  styleUrl: './topics.component.scss'
+  styleUrl: './topics.component.scss',
+  standalone: true
 })
 export class TopicsComponent {
 

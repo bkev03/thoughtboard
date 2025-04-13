@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
@@ -14,8 +14,11 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+  standalone: true
 })
 export class HomeComponent {
+  @Input() isLoggedIn = false;
 
+  
 }
