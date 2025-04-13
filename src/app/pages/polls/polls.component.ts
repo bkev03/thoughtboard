@@ -12,8 +12,10 @@ import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress
     MatIconModule,
     MatCard,
     MatCardModule,
-    MatProgressBarModule
-  ],
+    MatProgressBarModule,
+    MatProgressBar,
+    ReadableDatePipe
+],
   templateUrl: './polls.component.html',
   styleUrl: './polls.component.scss',
   standalone: true

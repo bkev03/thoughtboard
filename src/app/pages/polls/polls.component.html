@@ -14,11 +14,21 @@
         @for (poll of allPolls; track $index) {
           <mat-card class="poll-card">
             <mat-card-content class="poll-content">
-              <p class="poll-name">{{poll.name}}</p>
+              <p class="poll-name">{{poll.name}}
+                  @if (!poll.open) {
+                    <mat-icon class="closed-icon">lock</mat-icon>
+                  } @else {
+                    <mat-icon class="open-icon">lock_open</mat-icon>
+                  }
+              </p>
               <p class="poll-description">{{poll.description}}</p>
+              <p class="poll-data">All votes: {{poll.allVotes}}</p>
+              <p class="poll-data">Created by: {{poll.createdBy}}</p>
+              <p class="poll-data">Created at: {{poll.createdAt | readableDate}}</p>
+              <p class="poll-data">Closes on: {{poll.closeDate| readableDate}}</p>
               @for (pollOption of poll.options; track $index) {
                 <mat-card class="option-card">
-                  <p class="option-text">{{$index + 1}}. {{pollOption.text}}</p>
+                  <p class="option-text">{{$index + 1}}. {{pollOption.text}} ({{pollOption.votes}} votes)</p>
                   <mat-progress-bar mode="determinate" [value]="(pollOption.votes / poll.allVotes) * 100"></mat-progress-bar>
                 </mat-card>
               }

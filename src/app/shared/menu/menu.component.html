@@ -13,10 +13,12 @@
     <mat-icon matListItemIcon>topic</mat-icon>
     <span matListItemTitle>Topics</span>
   </a>
-  <a mat-list-item routerLink="/polls" routerLinkActive="active-list-item" (click)="closeSidenav()">
-    <mat-icon matListItemIcon>rule</mat-icon>
-    <span matListItemTitle>Polls</span>
-  </a>
+  @if (isLoggedIn) {
+    <a mat-list-item routerLink="/polls" routerLinkActive="active-list-item" (click)="closeSidenav()">
+      <mat-icon matListItemIcon>rule</mat-icon>
+      <span matListItemTitle>Polls</span>
+    </a>
+  }
   <a mat-list-item routerLink="/search" routerLinkActive="active-list-item" (click)="closeSidenav()">
       <mat-icon matListItemIcon>search</mat-icon>
       <span matListItemTitle>Search</span>
