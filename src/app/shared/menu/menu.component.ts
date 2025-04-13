@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,17 +21,19 @@ export class MenuComponent {
   @Input() sidenav!: MatSidenav;
   @Input() isLoggedIn: boolean = false;
   @Input() currentUser?: User;
+  @Output() logoff: EventEmitter<boolean> = new EventEmitter();
 
   logout(): void {
-    localStorage.setItem('isLoggedIn', 'false');
-    this.isLoggedIn = false;
-    localStorage.removeItem('currentUser');
-    window.location.href = '/home'
+    this.onLogoff();
   }
 
-  closeSidenav() {
+  closeSidenav(): void {
     if (this.sidenav) {
       this.sidenav.close();
     }
+  }
+
+  onLogoff(): void {
+    this.logoff.emit(true);
   }
 }

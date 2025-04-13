@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
     window.location.href = '/home'
   }
 
-  onToggleSidenav(sidenav: MatSidenav) {
+  onToggleSidenav(sidenav: MatSidenav): void {
     sidenav.toggle();
   }
 }

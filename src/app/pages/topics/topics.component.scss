@@ -46,6 +46,21 @@
     overflow-x: auto;
 }
 
+.show {
+
+}
+
+.hide {
+    display: none;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
 @media (max-width: 1000px) {
     .results-card {
         width: 90%;

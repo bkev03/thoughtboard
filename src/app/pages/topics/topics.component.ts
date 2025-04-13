@@ -7,11 +7,15 @@ import { TopicService } from '../../shared/services/topic.service';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { ReadableDatePipe } from '../../shared/pipes/date.pipe';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-topics',
   imports: [
+    CommonModule,
+    MatButtonModule,
+    MatButton,
     MatIcon,
     MatIconModule,
     MatButtonModule,
@@ -29,6 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class TopicsComponent implements OnInit {
   allTopics: Topic[] = [];
   displayedColumns: string[] = ['id', 'name', 'createdBy', 'createdAt', 'actions']
+  show: 'show' | 'hide' = 'show';
 
   constructor(private topicService: TopicService) {}
 
