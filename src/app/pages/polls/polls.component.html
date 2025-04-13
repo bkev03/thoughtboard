@@ -28,7 +28,10 @@
               <p class="poll-data">Closes on: {{poll.closeDate| readableDate}}</p>
               @for (pollOption of poll.options; track $index) {
                 <mat-card class="option-card">
-                  <p class="option-text">{{$index + 1}}. {{pollOption.text}} ({{pollOption.votes}} votes)</p>
+                  <div class="stats">
+                    <p class="option-text">{{$index + 1}}. {{pollOption.text}} ({{pollOption.votes}} votes)</p>
+                    <p class="percentage">{{((pollOption.votes / poll.allVotes) * 100).toFixed(2)}}%</p>
+                  </div>
                   <mat-progress-bar mode="determinate" [value]="(pollOption.votes / poll.allVotes) * 100"></mat-progress-bar>
                 </mat-card>
               }

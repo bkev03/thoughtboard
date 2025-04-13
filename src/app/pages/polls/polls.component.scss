@@ -72,14 +72,6 @@
     width: 100%;
 }
 
-.option-text {
-    align-self: flex-start;
-    padding-left: 30px;
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 0;
-}
-
 mat-progress-bar {
     width: 90%;
     height: 8px;
@@ -110,8 +102,39 @@ mat-progress-bar {
     color: green;
 }
 
+.stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+}
+
+.option-text {
+    padding-left: 30px;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.percentage {
+    padding-right: 30px;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 0;
+    color: blue;
+}
+
 @media (max-width: 1200px) {
     .results-card {
         width: 90%;
+    }
+
+    .option-text {
+        padding-left: 10px;
+    }
+    
+    .percentage {
+        padding-right: 10px;
     }
 }

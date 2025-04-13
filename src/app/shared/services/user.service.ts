@@ -15,7 +15,7 @@ export class UserService {
       signupDate: new Date(2016, 6, 23, 12, 30, 32, 25),
       email: 'test@email.com',
       password: 'testpassword',
-      role: "ROLE_USER",
+      role: "ROLE_USER"
     }
   ]
 

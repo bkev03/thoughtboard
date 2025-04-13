@@ -12,7 +12,7 @@
 }
 
 .results-card {
-    width: 90%;
+    width: 60%;
     box-shadow: 0 4px 20px;
 }
 
@@ -44,4 +44,10 @@
 
 .table-content {
     overflow-x: auto;
+}
+
+@media (max-width: 1000px) {
+    .results-card {
+        width: 90%;
+    }
 }
