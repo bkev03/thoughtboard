@@ -66,8 +66,8 @@ export class SignupComponent {
     const newUser: User = {
       nickname: this.signupForm.get('nickname')?.value || '',
       name: {
-        firstname: this.signupForm.get('firstname')?.value || '',
-        lastname: this.signupForm.get('lastname')?.value || ''
+        firstname: this.signupForm.get('name')?.get('firstname')?.value || '',
+        lastname: this.signupForm.get('name')?.get('lastname')?.value || ''
       },
       signupDate: new Date(),
       email: this.signupForm.get('email')?.value || '',
