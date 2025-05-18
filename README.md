@@ -1,7 +1,9 @@
 # ThoughtBoard - Általános fórum alkalmazás
 
 ## Információ a javításhoz
+A kész webalkalmazás a main branchen található.
 A polls rész az csak dummy adat, de a többi az Firebase. 
+A webalkalmazás hostolva is elérhető a következő linken: https://thoughtboard-a078d.web.app/
 
 ---
 
