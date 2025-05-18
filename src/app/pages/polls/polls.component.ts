@@ -28,5 +28,4 @@ export class PollsComponent implements OnInit {
   ngOnInit(): void {
     this.allPolls = this.pollService.getAllPolls();
   }
-
 }

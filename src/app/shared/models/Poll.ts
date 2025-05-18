@@ -1,9 +1,13 @@
+import { PollOption } from "./PollOption";
+
 export interface Poll {
-    id: string;
+    id: number;
     name: string;
     description: string;
+    open: boolean;
     createdAt: Date
+    closeDate: Date;
     createdBy: string;
-    firstOption: string;
-    secondOption: string;
+    options: PollOption[];
+    allVotes: number;
 }
