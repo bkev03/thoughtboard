@@ -1,10 +1,7 @@
 # ThoughtBoard - Általános fórum alkalmazás
 
 ## Információ a javításhoz
-Az első mérföldkőre elkészült program a main branchen található.  
-A program nagyrészt dummy/placeholder adatokkal dolgozik jelenleg még.  
-A teszt felhasználó adatai megtalálhatóak a kódban, azzal be lehet lépni.  
-Új felhasználó is regisztrálható, amivel szintén be lehet lépni, de MemoryDB révén a böngésző újraindításakor/az oldal bezárásakor az bevitt adatok elvesznek.  
+A polls rész az csak dummy adat, de a többi az Firebase. 
 
 ---
 
