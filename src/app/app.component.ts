@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { MenuComponent } from './shared/menu/menu.component';
@@ -7,6 +7,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { User } from './shared/models/User';
+import { AuthService } from './shared/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -23,27 +25,28 @@ import { User } from './shared/models/User';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'thoughtboard';
   isLoggedIn = false;
-  currentUser?: User;
+  private authSubscription?: Subscription;
+
+  constructor(
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.getFreshData();
+    this.authSubscription = this.authService.currUser.subscribe(user => {
+      this.isLoggedIn = !!user;
+      localStorage.setItem('isLoggedIn', this.isLoggedIn ? 'true' : 'false');
+    });
   }
 
-  getFreshData(): void {
-    this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    if (localStorage.getItem('currentUser')) {
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
-    }
+  ngOnDestroy(): void {
+    this.authSubscription?.unsubscribe();
   }
 
   logout(): void {
-    localStorage.setItem('isLoggedIn', 'false');
-    this.isLoggedIn = false;
-    localStorage.removeItem('currentUser');
-    window.location.href = '/home'
+    this.authService.logout();
   }
 
   onToggleSidenav(sidenav: MatSidenav): void {

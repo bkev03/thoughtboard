@@ -1,5 +1,4 @@
 import { PollOption } from "./PollOption";
-import { User } from "./User";
 
 export interface Poll {
     id: number;

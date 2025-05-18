@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,6 +10,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 import { UserService } from '../../shared/services/user.service';
 import { AppComponent } from '../../app.component';
+import { AuthService } from '../../shared/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -27,35 +29,59 @@ import { AppComponent } from '../../app.component';
   styleUrl: './login.component.scss',
   standalone: true
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('')
   })
 
   loginError: string = '';
+  authSubscription?: Subscription;
 
-  constructor(private router: Router, private userService: UserService, private appComponent: AppComponent) {}
+  constructor(
+    private router: Router, 
+    private authService: AuthService, 
+    private appComponent: AppComponent) {}
 
   onLogin(): void {
     this.loginError = '';
     
     const email = this.loginForm.value?.email || '';
     const password = this.loginForm.value?.password || '';
-    let foundUserWithThisEmail = this.userService.getUsers().find(u => u.email === email);
 
-    if (!foundUserWithThisEmail) {
-      this.loginError = 'No such user with this email.';
+    if (this.loginForm.invalid) {
+      this.loginError = "Email or password is in invalid format."
       return;
     }
 
-    if (foundUserWithThisEmail.password === password) {
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('currentUser', JSON.stringify(foundUserWithThisEmail));
-      this.appComponent.getFreshData();
-      this.router.navigateByUrl('/home');
-    } else {
-      this.loginError = 'Incorrect password.';
-    }
+    this.loginError = '';
+
+    this.authService.login(email, password)
+      .then(userCredential => {
+        console.log('Login successful:', userCredential.user);
+        this.authService.updateIsLoggedInStatus(true);
+        this.router.navigateByUrl('/home');
+      })
+      .catch(error => {
+        console.error('Login error:', error);
+
+        switch(error.code) {
+          case 'auth/user-not-found':
+            this.loginError = 'No user found with this email address';
+            break;
+          case 'auth/wrong-password':
+            this.loginError = 'Incorrect password';
+            break;
+          case 'auth/invalid-credential':
+            this.loginError = 'Invalid email or password';
+            break;
+          default:
+            this.loginError = 'Authentication failed. Please try again later.';
+        }
+      })
+  }
+
+  ngOnDestroy(): void {
+      this.authSubscription?.unsubscribe();
   }
 }

@@ -1,0 +1,25 @@
+<main>
+@if (currentTopic != null) {
+  <h1 class="title">{{ currentTopic.name }}</h1>
+  <div class="results">
+    <mat-card appearance="outlined" class="results-card">
+      <mat-card-header class="results-card-header">
+        {{ currentTopic.description }}
+      </mat-card-header>
+      <hr class="hr">
+      <mat-card-content>
+        <p class="comment">Comments</p>
+        @for (comment of comments; track $index) {
+          <mat-card class="comment-card">
+            <mat-card-content class="comment-content">
+              <p class="nickname">{{comment.nickname}} says:</p>
+              <p class="content">{{comment.content}}</p>
+              <p class="commented-at">Commented at: {{comment.createdAt | readableDate}}</p>
+            </mat-card-content>
+          </mat-card>
+        }
+      </mat-card-content>
+    </mat-card>
+  </div>
+}
+</main>

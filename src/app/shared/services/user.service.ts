@@ -1,50 +1,50 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/User';
+import { doc, Firestore, getDoc } from '@angular/fire/firestore';
+import { AuthService } from './auth.service';
+import { from, Observable, of, switchMap } from 'rxjs';
+import { Auth, getAuth } from '@angular/fire/auth';
+import { USER_COLLECTION } from '../constants/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  users: User[] = [
-    {
-      nickname: 'testuser',
-      name: {
-        firstname: 'Test',
-        lastname: 'User'
-      },
-      signupDate: new Date(2016, 6, 23, 12, 30, 32, 25),
-      email: 'test@email.com',
-      password: 'testpassword',
-      role: "ROLE_USER"
-    }
-  ]
+  constructor(
+    private firestore: Firestore,
+    private authService: AuthService,
+    private auth: Auth
+  ) { }
 
-  constructor() { }
+  getProfile(): Observable<User | null> {
+    return this.authService.currUser.pipe(
+      switchMap(authUser => {
+        if (!authUser) {
+          return of(null);
+        }
 
-  addUser(user: User): boolean {
-    if (this.users.find(u => u.nickname === user.nickname) || this.users.find(u => u.email === user.email)) {
-      return false;
-    }
-    
-    this.users.push(user);
-    return true;
+        return from(this.getUser(authUser.uid));
+      })
+    )
   }
 
-  getUsers(): User[] {
-    return this.users;
-  }
+  async getUser(userId: string): Promise<User | null> {
+    try {
+      const userDocRef = doc(this.firestore, USER_COLLECTION, userId);
+      const userSnapshot = await getDoc(userDocRef);
 
-  getUserByNickname(nickname: string): User | null {
-    if (!this.users.find(u => u.nickname === nickname)) {
+      if (!userSnapshot.exists()) {
+        return null;
+      }
+
+      const userData = userSnapshot.data() as User;
+      const user = { ...userData, id: userId }
+
+      return user;
+    } catch (error) {
+      console.error('An error occurred when loading current user:', error);
       return null;
     }
-
-    let found = this.users.find(u => u.nickname === nickname);
-
-    if (!found) {
-      return null;
-    }
-
-    return found;
   }
+
 }

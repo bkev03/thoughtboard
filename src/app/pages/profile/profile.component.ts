@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReadableDatePipe } from '../../shared/pipes/date.pipe';
 import { ReadableRolePipe } from '../../shared/pipes/role.pipe';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatCard, MatCardModule } from '@angular/material/card';
 import { User } from '../../shared/models/User';
+import { Timestamp } from '@angular/fire/firestore';
+import { Subscription } from 'rxjs';
+import { UserService } from '../../shared/services/user.service';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-profile',
@@ -18,30 +22,36 @@ import { User } from '../../shared/models/User';
   styleUrl: './profile.component.scss',
   standalone: true
 })
-export class ProfileComponent implements OnInit {
-  currentUser: User = {
-    nickname: 'testuser',
-    name: {
-      firstname: 'Test',
-      lastname: 'User'
-    },
-    signupDate: new Date(2016, 6, 23, 12, 30, 32, 25),
-    email: 'test@email.com',
-    password: 'testpassword',
-    role: "ROLE_USER"
-  }
+export class ProfileComponent implements OnInit, OnDestroy {
+  user: User | null = null;
+
+  constructor(
+    private userService: UserService,
+    private auth: Auth
+  ) {}
 
   isLoggedIn: boolean = false;
 
+  private subscription: Subscription | null = null;
+
   ngOnInit(): void {
-    this.checkLoggedInStatus();
+    this.loadProfile();
   }
 
-  checkLoggedInStatus(): void {
-    this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    if (localStorage.getItem('currentUser')) {
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser')!);
+  loadProfile(): void {
+    this.subscription = this.userService.getProfile().subscribe({
+      next: (data) => {
+        this.user = data;
+      },
+      error: (error) => {
+        console.error('Error loading profile:', error);
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
-
 }

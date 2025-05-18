@@ -11,6 +11,8 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { ReadableDatePipe } from '../../shared/pipes/date.pipe';
+import { take } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -32,27 +34,37 @@ import { ReadableDatePipe } from '../../shared/pipes/date.pipe';
 export class SearchComponent {
   searchText: string = '';
   foundTopics: Topic[] = [];
-  displayedColumns: string[] = ['id', 'name', 'createdBy', 'createdAt', 'actions']
+  allTopics: Topic[] = [];
+  displayedColumns: string[] = ['name', 'createdBy', 'createdAt', 'actions']
 
-  constructor(private topicService: TopicService) {
+  constructor(
+    private topicService: TopicService,
+    private router: Router
+  ) {}
 
+  ngOnInit(): void {
+    this.topicService.getAllTopics().pipe(take(1)).subscribe(topics => {
+      this.allTopics = topics;
+    });
   }
 
   onSearchFilterChange(searchText: string): void {
-    this.foundTopics = [];
-    let topics = this.topicService.getAllTopics();
+    this.foundTopics = []; 
+    console.log(this.allTopics);
     if (searchText.length === 0) {
       return;
     }
 
-    for (let i = 0; i < topics.length; i++) {
-      if (topics[i].name.toLowerCase().includes(searchText)) {
-        this.foundTopics.push(topics[i]);
+    for (let i = 0; i < this.allTopics.length; i++) {
+      if (this.allTopics[i].name.toLowerCase().includes(searchText)) {
+        this.foundTopics.push(this.allTopics[i]);
       }
     }
   }
 
-  viewTopic() {
-
+  viewTopic(topic: any) {
+    let t = topic as Topic;
+    let id = t.id;
+    this.router.navigate(['/current-topic', id]);
   }
 }

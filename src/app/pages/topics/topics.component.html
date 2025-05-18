@@ -6,7 +6,7 @@
         Results
       </mat-card-header>
       <hr class="hr">
-      @if (allTopics.length === 0) {
+      @if (allTopics === null || allTopics.length === 0) {
         <div class="no-topics-found"><p>No topics found.</p></div>
       } @else {
         <p class="found-topics-number">Found {{allTopics.length}} topic(s)</p>
@@ -19,11 +19,6 @@
         <mat-card class="table-card">
           <mat-card-content class="table-content">
             <table mat-table [ngClass]="show" [dataSource]="allTopics" class="mat-elevation-z8 topic-table">
-              <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef> ID </th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-              </ng-container>
-            
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Name </th>
                 <td mat-cell *matCellDef="let element"> {{element.name}} </td>
@@ -42,7 +37,7 @@
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Actions </th>
                 <td mat-cell *matCellDef="let element">
-                  <button (click)="viewTopic()" mat-icon-button color="primary">
+                  <button (click)="viewTopic(element)" mat-icon-button color="primary">
                     <mat-icon mat-icon-button>visibility</mat-icon>
                   </button>
                 </td>
