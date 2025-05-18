@@ -1,14 +1,9 @@
-import { PollOption } from "./PollOption";
-import { User } from "./User";
-
 export interface Poll {
-    id: number;
+    id: string;
     name: string;
     description: string;
-    open: boolean;
     createdAt: Date
-    closeDate: Date;
     createdBy: string;
-    options: PollOption[];
-    allVotes: number;
+    firstOption: string;
+    secondOption: string;
 }

@@ -12,6 +12,9 @@ import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angula
 
 import { User } from '../../shared/models/User';
 import { UserService } from '../../shared/services/user.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { Timestamp } from '@angular/fire/firestore';
+import { timestamp } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -31,9 +34,11 @@ import { UserService } from '../../shared/services/user.service';
   standalone: true
 })
 export class SignupComponent {
-  constructor(private router: Router, private userService: UserService) {
-    
-  }
+
+  constructor(
+    private router: Router, 
+    private authService: AuthService
+  ) {}
 
   signupForm = new FormGroup({
       nickname: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -63,25 +68,43 @@ export class SignupComponent {
       return;
     }
 
-    const newUser: User = {
+    const userData: Partial<User> = {
       nickname: this.signupForm.get('nickname')?.value || '',
       name: {
         firstname: this.signupForm.get('name')?.get('firstname')?.value || '',
         lastname: this.signupForm.get('name')?.get('lastname')?.value || ''
       },
-      signupDate: new Date(),
+      signupDate: Timestamp.now(),
       email: this.signupForm.get('email')?.value || '',
-      password: password?.value || '',
       role: 'ROLE_USER'
     }
 
-    if (!this.userService.addUser(newUser)) {
-      this.signupError.push('Nickname or email already in use.');
-      return;
-    }
+    const email = this.signupForm.value.email || '';
+    const pword = this.signupForm.value.password || '';
 
-    // JUST FOR TESTING:
-    console.log("New user created:", newUser);
+    this.authService.signUp(email, pword, userData)
+      .then(userCredential => {
+        console.log('Signup successful:', userCredential.user);
+        this.authService.updateIsLoggedInStatus(true);
+        this.router.navigateByUrl('/home');
+      })
+      .catch(error => {
+        console.error('Registration error:', error);
+        
+        switch(error.code) {
+          case 'auth/email-already-in-use':
+            this.signupError.push('This email is already in use.');
+            break;
+          case 'auth/invalid-email':
+            this.signupError.push('Invalid email.');
+            break;
+          case 'auth/weak-password':
+            this.signupError.push("Weak password: Use at least 6 characters.");
+            break;
+          default:
+            this.signupError.push("An error has occurred during signing up. Please try again.")    
+        }
+      });
 
     this.router.navigateByUrl('/login');
   }

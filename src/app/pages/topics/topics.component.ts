@@ -9,6 +9,8 @@ import { ReadableDatePipe } from '../../shared/pipes/date.pipe';
 import { FormsModule } from '@angular/forms';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { Observable, take } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-topics',
@@ -31,18 +33,25 @@ import { CommonModule } from '@angular/common';
   standalone: true
 })
 export class TopicsComponent implements OnInit {
-  allTopics: Topic[] = [];
-  displayedColumns: string[] = ['id', 'name', 'createdBy', 'createdAt', 'actions']
+  allTopics: Topic[] | null = null;
+  displayedColumns: string[] = ['name', 'createdBy', 'createdAt', 'actions']
   show: 'show' | 'hide' = 'show';
 
-  constructor(private topicService: TopicService) {}
+  constructor(
+    private topicService: TopicService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.allTopics = this.topicService.getAllTopics();
+    this.topicService.getAllTopics().pipe(take(1)).subscribe(topics => {
+      this.allTopics = topics;
+    });
   }
 
-  viewTopic() {
-
+  viewTopic(topic: any) {
+    let t = topic as Topic;
+    let id = t.id;
+    this.router.navigate(['/current-topic', id]);
   }
 
 }

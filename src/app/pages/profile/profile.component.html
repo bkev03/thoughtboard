@@ -1,18 +1,20 @@
 <main>
-  <div class="profile-container">
+  @if (user) {
+    <div class="profile-container">
     <mat-card class="profile-card">
       <mat-card-header class="profile-header">
-        <div class="avatar">{{currentUser.nickname[0]}}</div>
-        <div class="nickname">{{currentUser.nickname}}'s profile</div>
+        <div class="avatar">{{user.nickname[0]}}</div>
+        <div class="nickname">{{user.nickname}}'s profile</div>
       </mat-card-header>
       <mat-card-content class="card-content">
-        <div class="user-data"><p class="data">Nickname: {{currentUser.nickname}}</p></div>
-        <div class="user-data"><p class="data">First Name: {{currentUser.name.firstname}}</p></div>
-        <div class="user-data"><p class="data">Last Name: {{currentUser.name.lastname}}</p></div>
-        <div class="user-data"><p class="data">Email: {{currentUser.email}}</p></div>
-        <div class="user-data"><p class="data">Signup date: {{currentUser.signupDate | readableDate}}</p></div>
-        <div class="user-data"><p class="data">Role: {{currentUser.role | readableRole}}</p></div>
+        <div class="user-data"><p class="data">Nickname: {{user.nickname}}</p></div>
+        <div class="user-data"><p class="data">First Name: {{user.name.firstname}}</p></div>
+        <div class="user-data"><p class="data">Last Name: {{user.name.lastname}}</p></div>
+        <div class="user-data"><p class="data">Email: {{user.email}}</p></div>
+        <div class="user-data"><p class="data">Signup date: {{user.signupDate | readableDate}}</p></div>
+        <div class="user-data"><p class="data">Role: {{user.role | readableRole}}</p></div>
       </mat-card-content>
     </mat-card>
-  </div>
+    </div>
+  }
 </main>
