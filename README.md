@@ -5,6 +5,10 @@ A kész webalkalmazás a main branchen található.
 A polls rész az csak dummy adat, de a többi az Firebase.  
 A webalkalmazás hostolva is elérhető a következő linken: https://thoughtboard-a078d.web.app/  
 
+Egy teszt felhasználó bejelentkezési adatai:  
+- email: test@email.com  
+- jelszó: testpassword
+
 ---
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
